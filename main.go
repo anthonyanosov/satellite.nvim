@@ -9,6 +9,11 @@ import (
 	"path/filepath"
 )
 
+type FunctionMetric struct {
+	Name       string
+	Complexity int
+}
+
 func main() {
 	// Take in an arg - one Go file
 	src := flag.String("src", "main.go", "Go source file to analyze")
@@ -26,7 +31,40 @@ func main() {
 	}
 
 	// Look through the AST
+	var funs []FunctionMetric
+	ast.Inspect(astFile, func(n ast.Node) bool {
+		if fn, ok := n.(*ast.FuncDecl); ok {
+			complexity := 1
 
+			ast.Inspect(fn.Body, func(n ast.Node) bool {
+				switch t := n.(type) {
+				case *ast.IfStmt:
+					complexity++
+				case *ast.ForStmt:
+					complexity++
+				case *ast.RangeStmt:
+					complexity++
+				case *ast.BinaryExpr:
+					if t.Op == token.LAND || t.Op == token.LOR {
+						complexity++
+					}
+				}
+				return true
+			})
+
+			funs = append(funs, FunctionMetric{
+				Name:       fn.Name.Name,
+				Complexity: complexity,
+			})
+
+			return false
+		}
+		return true
+	})
+
+	for _, f := range funs {
+		fmt.Printf("%+v\n", f)
+	}
 }
 
 func parseFile(path string) (*ast.File, error) {
