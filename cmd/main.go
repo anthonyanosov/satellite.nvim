@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"os"
 	"github.com/anthonyanosov/javelin/pkg"
+	"os"
 )
 
 func main() {
