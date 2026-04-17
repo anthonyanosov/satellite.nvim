@@ -14,3 +14,14 @@ vim.api.nvim_create_user_command("SatelliteClear", function()
 end, {
 	desc = "Clear Satellite virtual text",
 })
+
+local group = vim.api.nvim_create_augroup("SatelliteAuto", { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+	group = group,
+	pattern = "*.go",
+	desc = "Auto-refresh Go complexity hints",
+	callback = function()
+		satellite.show_complexity()
+	end,
+})

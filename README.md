@@ -11,6 +11,7 @@ for each function declaration.
 ## Features
 
 - Inline complexity hints using Neovim virtual text
+- Auto-refresh on Go buffer open and save
 - On-demand analysis via command or keymap
 - LazyVim-friendly setup
 
@@ -73,9 +74,10 @@ return {
 
 ## Usage
 
-- `:Satellite` - Analyze current Go buffer and show inline complexity
+- Automatically analyzes Go buffers on open (`BufEnter`) and save (`BufWritePost`)
+- `:Satellite` - Manually analyze current Go buffer and show inline complexity
 - `:SatelliteClear` - Clear all Satellite virtual text in current buffer
-- Optional keymap: `<leader>sc` (from config above)
+- Optional keymap: `<leader>sc` (from config above, still useful for manual refresh)
 
 ## CLI Usage
 
@@ -91,7 +93,6 @@ Example output:
 
 ## Roadmap
 
-- Auto-refresh on `BufWritePost` for Go buffers
 - Package-level summary view for `sat`
 - Explicit flag to include/exclude anonymous functions
 - Maybe a custom parser to generate ASTs? 🧪
