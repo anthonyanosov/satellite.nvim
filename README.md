@@ -2,7 +2,7 @@
 
 <img src="/assets/satellite.png" alt="satellite" width="200" />
 
-Satellite is a lightweight Neovim plugin + Go CLI for showing Go function
+Satellite is a lightweight Neovim plugin + CLI for showing Go function
 cyclomatic complexity inline, directly in your editor.
 
 It analyzes the current Go buffer and renders `🛰️ <complexity>` at end-of-line
@@ -63,7 +63,7 @@ For LazyVim users, this is often under `~/.config/nvim/lua/plugins/`, make a new
 ```lua
 return {
   {
-    "anthonyanosov/satellite",
+    "anthonyanosov/satellite.nvim",
     config = function()
       local satellite = require("satellite")
       vim.keymap.set("n", "<leader>sc", satellite.show_complexity, { desc = "Satellite: Show complexity" })

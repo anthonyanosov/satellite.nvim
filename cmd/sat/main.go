@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/anthonyanosov/satellite/pkg"
+	"github.com/anthonyanosov/satellite.nvim/pkg"
 	"os"
 )
 
